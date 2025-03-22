@@ -3,13 +3,12 @@
 # Run `pod lib lint audioplayers.podspec' to validate before publishing.
 #
 Pod::Spec.new do |s|
-  s.name             = 'audioplayers_darwin'
+  s.name             = 'openhiit_audioplayers_darwin'
   s.version          = '0.0.1'
   s.summary          = 'iOS implementation of audioplayers, a Flutter plugin to play multiple audio files simultaneously.'
   s.description      = 'iOS implementation of audioplayers, a Flutter plugin to play multiple audio files simultaneously.'
-  s.homepage         = 'https://github.com/bluefireteam/audioplayers'
+  s.homepage         = 'https://github.com/a-mabe/audioplayers'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Blue Fire' => 'contact@blue-fire.xyz' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
