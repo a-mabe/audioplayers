@@ -38,7 +38,7 @@ public class SwiftAudioplayersDarwinPlugin: NSObject, FlutterPlugin {
     self.globalEvents = GlobalAudioPlayersStreamHandler()
 
     do {
-      try globalContext.apply()
+      // try globalContext.apply()
     } catch {
       // ignore error on initialization
     }
