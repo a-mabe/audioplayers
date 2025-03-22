@@ -9,9 +9,7 @@ flutter:
     implements: audioplayers
     platforms:
       ios:
-        pluginClass: AudioplayersDarwinPlugin
-      macos:
-        pluginClass: AudioplayersDarwinPlugin
+        pluginClass: OpenhiitAudioplayersDarwinPlugin
 
 dependencies:
   audioplayers_platform_interface: ^7.1.0
