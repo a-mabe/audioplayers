@@ -24,6 +24,10 @@ public class AudioplayersDarwinPlugin: NSObject, FlutterPlugin {
   var globalContext = AudioContext()
   var players = [String: WrappedMediaPlayer]()
 
+  #if os(iOS)
+  var applyGlobalContextOnInit: Bool = true
+  #endif
+
   init(
     registrar: FlutterPluginRegistrar,
     binaryMessenger: FlutterBinaryMessenger,
@@ -37,11 +41,21 @@ public class AudioplayersDarwinPlugin: NSObject, FlutterPlugin {
     self.globalMethods = globalMethodChannel
     self.globalEvents = GlobalAudioPlayersStreamHandler()
 
-    do {
-      try globalContext.apply()
-    } catch {
-      // ignore error on initialization
+    #if os(iOS)
+    if applyGlobalContextOnInit {
+        do {
+            try globalContext.apply()
+        } catch {
+            // ignore error on initialization
+        }
     }
+    #else
+    do {
+        try globalContext.apply()
+    } catch {
+        // ignore error on initialization
+    }
+    #endif
 
     super.init()
 
@@ -98,6 +112,23 @@ public class AudioplayersDarwinPlugin: NSObject, FlutterPlugin {
     // global handlers (no playerId)
     if method == "init" {
       dispose()
+    } else if method == "setIOSAudioContextOnInit" {
+      #if os(iOS)
+        if let args = call.arguments as? [String: Any],
+          let apply = args["apply"] as? Bool {
+            applyGlobalContextOnInit = apply
+        } else {
+            result(
+                FlutterError(
+                    code: "DarwinAudioError",
+                    message: "Missing or invalid 'apply' argument",
+                    details: nil
+                )
+            )
+        }
+      #else
+        globalEvents.onLog(message: "setIOSAudioContextOnInit is not supported on this platform")
+      #endif
     } else if method == "setAudioContext" {
       #if os(iOS)
         do {

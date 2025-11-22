@@ -87,6 +87,18 @@ class WebAudioplayersPlatform extends AudioplayersPlatformInterface {
   }
 
   @override
+  Future<void> setIOSAudioContextOnInit(String playerId,
+      {bool apply = true}) async {
+    getPlayer(playerId).eventStreamController.add(
+          const AudioEvent(
+            eventType: AudioEventType.log,
+            logMessage:
+                'Setting iOS AudioContext on init is not supported on Web',
+          ),
+        );
+  }
+
+  @override
   Future<void> setPlayerMode(
     String playerId,
     PlayerMode playerMode,

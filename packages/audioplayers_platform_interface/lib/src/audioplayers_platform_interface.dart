@@ -111,6 +111,8 @@ abstract class MethodChannelAudioplayersPlatformInterface {
     AudioContext audioContext,
   );
 
+  Future<void> setIOSAudioContextOnInit(String playerId, {bool apply = true});
+
   Future<void> setPlayerMode(
     String playerId,
     PlayerMode playerMode,

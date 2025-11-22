@@ -90,6 +90,15 @@ mixin MethodChannelAudioplayersPlatform
   }
 
   @override
+  Future<void> setIOSAudioContextOnInit(String playerId, {bool apply = true}) {
+    return _call(
+      'setIOSAudioContextOnInit',
+      playerId,
+      <String, dynamic>{'apply': apply},
+    );
+  }
+
+  @override
   Future<void> setBalance(
     String playerId,
     double balance,
