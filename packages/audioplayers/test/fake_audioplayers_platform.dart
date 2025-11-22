@@ -98,6 +98,16 @@ class FakeAudioplayersPlatform extends AudioplayersPlatformInterface {
   }
 
   @override
+  Future<void> setIOSAudioContextOnInit(
+    String playerId, {
+    bool apply = true,
+  }) async {
+    calls.add(
+      FakeCall(id: playerId, method: 'setIOSAudioContextOnInit', value: apply),
+    );
+  }
+
+  @override
   Future<void> setBalance(String playerId, double balance) async {
     calls.add(FakeCall(id: playerId, method: 'setBalance', value: balance));
   }

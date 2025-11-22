@@ -228,6 +228,17 @@ class AudioPlayer {
     return _platform.setAudioContext(playerId, ctx);
   }
 
+  Future<void> setIOSAudioContextOnInit({bool apply = true}) async {
+    await creatingCompleter.future;
+
+    if (!Platform.isIOS) {
+      return; // no-op on other platforms
+    }
+
+    // Call the platform interface method
+    return _platform.setIOSAudioContextOnInit(playerId, apply: apply);
+  }
+
   Future<void> setPlayerMode(PlayerMode mode) async {
     _mode = mode;
     await creatingCompleter.future;
